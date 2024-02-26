@@ -134,8 +134,8 @@ public class FarmSceneProcess : MonoBehaviour
         rs_Window.goCooking.onClick.AddListener( () =>
         {
             rs_food.goCookingClickEvent(cooking.img, cooking.name);
-            
-            rs_food.popupWindowScale(rs_Window.transform ,  eventList);
+            rs_Window.popupWindowScale();
+            rs_food.popupWindowScale(eventList);
         });
 
        

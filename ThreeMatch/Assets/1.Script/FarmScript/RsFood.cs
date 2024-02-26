@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using KoreanTyper;
 public class RsFood : MonoBehaviour
 {
 
@@ -14,6 +14,8 @@ public class RsFood : MonoBehaviour
     [SerializeField] private TextMeshProUGUI foodNameText;
 
     [SerializeField] private Slider resultSlider;
+
+    [SerializeField] private TextMeshProUGUI cookingClearText;
 
     [SerializeField] private Button closeBtn;
 
@@ -40,12 +42,21 @@ public class RsFood : MonoBehaviour
         await UniTask.Delay(System.TimeSpan.FromSeconds(0.2f));
         DOTween.To(() => resultSlider.value, x => resultSlider.value = x, 1, 2).OnComplete(async () =>
         {
-            Debug.Log("완");
-            foreach (var item in list)
+            // 확률 넣고 성공 실패 넣기 
+            bool avg = Random.Range(0, 100) > 51 ? true : false;
+
+            cookingClearText.text = "";
+            list.ForEach(x => x.item.itemCnt -= x.curCnt);
+
+            if (avg)
             {
-                item.item.itemCnt -= item.curCnt;
+                typingText("요 리 완 성").Forget();
             }
-            Debug.Log("완 후");
+            else 
+            {
+                typingText("요 리 실 패").Forget();
+            }
+
 
         });
         await UniTask.Delay(System.TimeSpan.FromSeconds(3f));
@@ -53,6 +64,8 @@ public class RsFood : MonoBehaviour
         list.ForEach(x => x.item = null);
         list.Clear();
         closeBtn.gameObject.SetActive(true);
+
+        
 
         await UniTask.Yield();
     }
@@ -80,9 +93,8 @@ public class RsFood : MonoBehaviour
     }
 
     //팝업창 닫고 다음창열고 슬라이더 진행 
-    public void popupWindowScale(Transform rs_Window ,List<curAction> list)
+    public void popupWindowScale(List<curAction> list)
     {
-        rs_Window.DOScale(0 , 0.2f);
         transform.DOScale(0.8f, 0.2f).OnComplete(() => 
         {
             sliderProcess(list).Forget();
@@ -91,7 +103,19 @@ public class RsFood : MonoBehaviour
 
 
 
+    private async UniTask typingText(string txt)
+    {
+        await UniTask.Yield();
 
+        string text = txt;
+
+        for (int i = 0; i <= text.GetTypingLength(); i++)
+        {
+            cookingClearText.text = text.Typing(i);
+            await UniTask.Delay(System.TimeSpan.FromSeconds(0.03f));
+        }
+        
+    }
 
 
 }

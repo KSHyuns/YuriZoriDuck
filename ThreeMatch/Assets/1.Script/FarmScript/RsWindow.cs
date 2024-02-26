@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,14 @@ public class RsWindow : MonoBehaviour
     public Button goCooking;
 
     public Button close;
+
+
+    public void popupWindowScale()
+    {
+        transform.DOScale(0, 0.2f);
+    }
+
+
 }
 
 [System.Serializable]
