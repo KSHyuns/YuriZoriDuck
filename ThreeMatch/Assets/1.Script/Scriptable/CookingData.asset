@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51576ca372a7cd74c8977dba5f27706d, type: 3}
+  m_Name: CookingData
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  finishCooking:
+  - name: Pie
+    img: {fileID: 21300000, guid: 0a8fcaffcf9f8d34f9aedbcfe83353b0, type: 3}
+    ingredients:
+    - kind: 0
+      img: {fileID: 21300000, guid: 668966247c3687341adea537c511f01f, type: 3}
+      cnt: 1
+    - kind: 1
+      img: {fileID: 21300000, guid: bb95d35478bad4043a416ded82b2c14e, type: 3}
+      cnt: 1
+    - kind: 2
+      img: {fileID: 21300000, guid: 6e524dca915a58b408f62e67123ce912, type: 3}
+      cnt: 1
+  - name: ' Chicken soup'
+    img: {fileID: 21300000, guid: 17939543966b29349877729d71146483, type: 3}
+    ingredients:
+    - kind: 3
+      img: {fileID: 21300000, guid: 40d74219fdf9b924482b9beaeb0b00ed, type: 3}
+      cnt: 1
+    - kind: 4
+      img: {fileID: 21300000, guid: 0a02bba35ec1b074cac9b200cab1e1f5, type: 3}
+      cnt: 1
+    - kind: 5
+      img: {fileID: 21300000, guid: 446dea87b4d2e0c418ffe55c0f217444, type: 3}
+      cnt: 1
+  slotPrefabs: {fileID: 7407423731858058065, guid: a922e3c909c2bc04590f16df90e99594, type: 3}
+  itemPrefabs: {fileID: 3577362164000256983, guid: 390dc6d527e7cdb46ba8c03f2207b181, type: 3}
+  FarmCookingSlotPrefabs: {fileID: 9118621091274143868, guid: 6ce89c17d7a7fa543ae4e9cbc4b6220b, type: 3}

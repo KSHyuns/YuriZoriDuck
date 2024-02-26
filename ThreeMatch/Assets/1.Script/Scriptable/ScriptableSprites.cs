@@ -7,5 +7,7 @@ public class ScriptableSprites : ScriptableObject
 {
     public Sprite[] tileSprites;
 
-    public Tile tile;
+    public Block block;
+
+    public Cell cell;
 }

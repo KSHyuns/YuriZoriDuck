@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: ScriptableSprites
   m_EditorClassIdentifier: 
   tileSprites:
-  - {fileID: 21300000, guid: 885027a95a7f92a4e97c92a4dc8d7f73, type: 3}
-  - {fileID: 21300000, guid: 351f0d018822d6a4fbac97f5bef292ff, type: 3}
-  - {fileID: 21300000, guid: 56c7560280f31eb4b8ae13d85eab6bc1, type: 3}
-  - {fileID: 21300000, guid: 1edc4d13b1dc91d4aa051859031fc4cd, type: 3}
-  - {fileID: 21300000, guid: 59b0a1fed5a473c47af1c19e0f990172, type: 3}
-  - {fileID: 21300000, guid: 414b5e0780f17ad4d9f3816ea4ec19d3, type: 3}
-  - {fileID: 21300000, guid: 813571b29c4ef1b44a0d2b49ccb0c5ec, type: 3}
-  tile: {fileID: 8518631138744276692, guid: 26b39bc6fda124248bfad41d28b22eaa, type: 3}
+  - {fileID: 21300000, guid: 668966247c3687341adea537c511f01f, type: 3}
+  - {fileID: 21300000, guid: bb95d35478bad4043a416ded82b2c14e, type: 3}
+  - {fileID: 21300000, guid: 6e524dca915a58b408f62e67123ce912, type: 3}
+  - {fileID: 21300000, guid: 40d74219fdf9b924482b9beaeb0b00ed, type: 3}
+  - {fileID: 21300000, guid: 0a02bba35ec1b074cac9b200cab1e1f5, type: 3}
+  - {fileID: 21300000, guid: 446dea87b4d2e0c418ffe55c0f217444, type: 3}
+  block: {fileID: 8518631138744276692, guid: 26b39bc6fda124248bfad41d28b22eaa, type: 3}
+  cell: {fileID: 1802626524935207963, guid: 56dc6ccf7b830ec47a3de785e352b177, type: 3}

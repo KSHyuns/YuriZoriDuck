@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": "2.5.3",
+    "com.shlifedev.ugs": "1.0.8",
     "com.unity.collab-proxy": "2.2.0",
     "com.unity.feature.2d": "2.0.0",
     "com.unity.ide.rider": "3.0.27",
@@ -43,5 +45,23 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.cysharp.unitask",
+        "com.chanuklee.unityexpandtool",
+        "com.coffee.ui-particle",
+        "com.roytheunissen.assetpalette",
+        "com.coffee.unmask",
+        "com.marijnzwemmer.unity-toolbar-extender",
+        "com.yasirkula.nativeshare",
+        "com.thisotherthing.uishapeskit",
+        "com.studio23.ss2.puzzlesystem",
+        "com.shlifedev.ugs"
+      ]
+    }
+  ]
 }
