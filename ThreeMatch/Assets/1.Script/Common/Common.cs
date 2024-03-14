@@ -26,12 +26,13 @@ public class curAction
 }
 public enum CookingKind
 {
-    FLOUR = 0,
-    SALT,
-    OIL,
-    CHICKEN,
-    ONIONS,
-    CARROT,
+    감자 = 0,
+    고구마,
+    누룽지,
+    물,
+    설탕,
+    소금,
+    식용류,
     MAX
 }
 

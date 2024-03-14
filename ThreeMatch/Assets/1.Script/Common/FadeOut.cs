@@ -23,7 +23,7 @@ public class FadeOut
     public void In(CanvasGroup fadeGroup)
     {
         Sequence sequence = DOTween.Sequence().OnStart(()=>{}).
-        Append(DOTween.To(()=> canvasGroup.alpha , x=> canvasGroup.alpha = x , 0,1))
+        Append(DOTween.To(()=> canvasGroup.alpha , x=> canvasGroup.alpha = x , 0,1.5f))
         .AppendCallback(()=>{fadeGroup.blocksRaycasts = false;});
     }
 

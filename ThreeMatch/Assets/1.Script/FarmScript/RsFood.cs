@@ -40,20 +40,26 @@ public class RsFood : MonoBehaviour
         Debug.Log("횟수?");
 
         await UniTask.Delay(System.TimeSpan.FromSeconds(0.2f));
+        SoundManager.Instance.Sound_Play("Slider" , true , Property.SFX , 1f);
         DOTween.To(() => resultSlider.value, x => resultSlider.value = x, 1, 2).OnComplete(async () =>
         {
-            // 확률 넣고 성공 실패 넣기 
-            bool avg = Random.Range(0, 100) > 51 ? true : false;
+            SoundManager.Instance.Sound_SFX_Stop();
+            // 확률 넣고 성공 실패 넣기
+            // 0 ~ 50 성공
+            // 51 ~ 99 실패
+            bool avg = Random.Range(0f, 100f) > 51f ? true : false;
 
             cookingClearText.text = "";
             list.ForEach(x => x.item.itemCnt -= x.curCnt);
 
             if (avg)
             {
+                SoundManager.Instance.Sound_Play("CookingSeccess" ,false , Property.SFX);
                 typingText("요 리 완 성").Forget();
             }
             else 
             {
+                SoundManager.Instance.Sound_Play("CookingFail", false, Property.SFX);
                 typingText("요 리 실 패").Forget();
             }
 
@@ -87,7 +93,10 @@ public class RsFood : MonoBehaviour
         //닫기 버튼 클릭시 
         closeBtn.onClick.AddListener(() => 
         {
+            SoundManager.Instance.Sound_Play("Btn", false, Property.SFX);
+            cookingClearText.text = "";
             transform.DOScale(0 , 0.2f);
+            
         });
     
     }
@@ -95,6 +104,7 @@ public class RsFood : MonoBehaviour
     //팝업창 닫고 다음창열고 슬라이더 진행 
     public void popupWindowScale(List<curAction> list)
     {
+        SoundManager.Instance.Sound_Play("Popup", false, Property.SFX);
         transform.DOScale(0.8f, 0.2f).OnComplete(() => 
         {
             sliderProcess(list).Forget();
@@ -116,6 +126,9 @@ public class RsFood : MonoBehaviour
         }
         
     }
+
+
+
 
 
 }

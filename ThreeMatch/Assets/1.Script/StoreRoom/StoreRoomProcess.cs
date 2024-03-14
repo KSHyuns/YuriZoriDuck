@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Timeline.Actions.MenuPriority;
 
 public class StoreRoomProcess : MonoBehaviour
 {
@@ -34,6 +33,9 @@ public class StoreRoomProcess : MonoBehaviour
         }
     }
 
+    public Button PrevBtn;
+
+
 
     private void Awake()
     {
@@ -42,11 +44,18 @@ public class StoreRoomProcess : MonoBehaviour
 
         StoreRoomSetting();
         AddSlotBtn.onClick.AddListener(AddSlot);
+
+        PrevBtn.onClick.AddListener(() => { GameManager.Instance.LevelChange("MainScene"); });
+
+        SoundManager.Instance.Sound_Play("StoreRoomBGM" , true , Property.BGM);
     }
 
     private void StoreRoomSetting()
     {
         #region 슬롯 생성
+
+        SlotCnt = GameManager.Instance.gameData.storeRoom.SlotCnt;
+
         int cnt = GameManager.Instance.gameData.storeRoom.SlotCnt;
         for (int i = 0 ; i < cnt ; i++) 
         {
@@ -76,7 +85,11 @@ public class StoreRoomProcess : MonoBehaviour
 
     public void AddSlot()
     {
-        GameManager.Instance.gameData.storeRoom.SlotCnt++;
+        SoundManager.Instance.Sound_Play("Btn" ,false , Property.SFX);
+
+        GameManager.Instance.gameData.storeRoom.SlotCnt += 1;
+        SlotCnt = GameManager.Instance.gameData.storeRoom.SlotCnt;
+
         var slot = Instantiate(cookingData.slotPrefabs, slotParent);
         slots.Add(slot);
     }

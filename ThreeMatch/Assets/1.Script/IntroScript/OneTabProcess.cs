@@ -25,6 +25,9 @@ public class OneTabProcess : MonoBehaviour
     private void Start()
     {
         tapAnim();
+
+
+        SoundManager.Instance.Sound_Play("IntroMainBGM", true, Property.BGM);
     }
 
     private void tapAnim()
@@ -49,6 +52,7 @@ public class OneTabProcess : MonoBehaviour
         #if UNITY_EDITOR
         if(Input.GetMouseButtonDown(0))
         {
+            SoundManager.Instance.Sound_Play("Btn", false, Property.SFX);
             Process?.Invoke();
         }
         #endif
@@ -56,6 +60,7 @@ public class OneTabProcess : MonoBehaviour
 
     private void Down(Finger finger)
     {
+        SoundManager.Instance.Sound_Play("Btn", false, Property.SFX);
         {
             Process?.Invoke();
         }

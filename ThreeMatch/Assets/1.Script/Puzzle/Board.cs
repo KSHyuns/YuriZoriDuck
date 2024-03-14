@@ -28,12 +28,12 @@ public class Board : MonoBehaviour
    
     public bool blockMoving = false;
 
-    public AnimationCurve curve;
+    
 
     private void Awake() {
-        instance =this;
-
+        instance = this;
         touchSlide = FindObjectOfType<TouchSlide>();
+        SoundManager.Instance.Sound_Play("GameBGM", true, Property.BGM);
     }
     // Start is called before the first frame update
     void Start()
@@ -60,7 +60,7 @@ public class Board : MonoBehaviour
         for(int i = -x/2 ; i <=x/2 ; i++)
         {
             Cell cell   = Instantiate(assets_Sprite.cell , CellParent.transform);
-            Block block = Instantiate(assets_Sprite.block);
+            Block block = CreateBlock();
 
             cellBoard[i+x/2 ,j] = cell;
 
@@ -71,9 +71,6 @@ public class Board : MonoBehaviour
             cell.transform.localPosition = cell.position;
             cell.block = block;
 
-            CookingKind kind = (CookingKind)UnityEngine.Random.Range(0,(int)CookingKind.MAX);
-            Sprite sprite = assets_Sprite.tileSprites[(int)kind];
-            block.Set(this,sprite ,kind);
             block.transform.SetParent(cell.transform);
             block.transform.localPosition = new Vector3(0 , 0 , 0);
             block.name = $"{i+x/2},{j} block";
@@ -92,7 +89,28 @@ public class Board : MonoBehaviour
     public Block CreateBlock()
     {
         var blc = Instantiate(assets_Sprite.block);
-        CookingKind kind = (CookingKind)UnityEngine.Random.Range(0, (int)CookingKind.MAX);
+
+        // 확률 조절
+        //100중 7 
+        float rnd = UnityEngine.Random.Range(0f, 30f * (int)CookingKind.MAX );
+        int n = 0;
+        //  0 ~ 15
+        // 16 ~ 30
+        // 31 ~ 45
+        // 45 ~ 60
+        // 60 ~ 75
+        // 75 ~ 90
+        // 91 ~ 100
+        if (rnd > 0f && rnd < 30f) n = 0;
+        else if (rnd >= 30f && rnd < 60f) n = 1;
+        else if(rnd >= 60f && rnd < 90f) n = 2;
+        else if(rnd >= 90f && rnd < 120f) n = 3;
+        else if (rnd >= 120f && rnd < 150f) n = 4;
+        else if (rnd >= 150f && rnd < 180f) n = 5;
+        else if (rnd >= 180f && rnd <= 210f) n = 6;
+
+
+        CookingKind kind = (CookingKind)n; //UnityEngine.Random.Range(0, (int)CookingKind.MAX);
         Sprite sprite = assets_Sprite.tileSprites[(int)kind];
         blc.Set(this ,sprite,kind);
         return blc;

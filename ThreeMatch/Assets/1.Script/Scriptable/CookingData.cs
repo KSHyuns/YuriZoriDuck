@@ -22,6 +22,11 @@ public class CookingData : SerializedScriptableObject
     //Farm Slot 프리팹
     public FarmCookingSlot FarmCookingSlotPrefabs;
 
+    //요리합성 시 요리 재료 칸 프리팹
+    public RsIngredients ingredientsPrefabs;
+    //ex
+    public SlotEx slotExPrefabs;
+
 }
 
 

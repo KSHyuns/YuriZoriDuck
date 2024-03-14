@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 
 public class GameManager : Singleton<GameManager>
@@ -19,8 +20,9 @@ public class GameManager : Singleton<GameManager>
 
    //세이브 로드용 게임데이터
     public GameData gameData;
+
+
     
-  
 
     public override void Awake()
     {
@@ -28,7 +30,7 @@ public class GameManager : Singleton<GameManager>
         //뒤끝 초기화
         //ServerManager.BackEndInitialize();
 
-
+        Init();
         //로드 된게 없다면 
         gameData = new GameData() { nickname = "Test", storeRoom = new Inventory(16), lifeCnt = 5 };
 
@@ -45,8 +47,8 @@ public class GameManager : Singleton<GameManager>
         // UnityGoogleSheet.Write(newData);
 
 #if UNITY_ANDROID
-        Login.LoginProcess(Init);
-        #endif
+      //  Login.LoginProcess(Init);
+#endif
 
     }
 
@@ -66,7 +68,8 @@ public class GameManager : Singleton<GameManager>
 
 
     public void LevelChange(string sceneName)
-    {   
+    {
+        SoundManager.Instance.Sound_Play("Btn", false, Property.SFX);
         fadeGroup.blocksRaycasts = true;
         fadeOut.Out(
         ()=>
@@ -75,7 +78,25 @@ public class GameManager : Singleton<GameManager>
         });
     }
 
+    /// <summary>
+    /// 게임이 종료 됬을떄 실행
+    /// </summary>
+    private void OnApplicationQuit()
+    {
+        
+    }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus)
+        {
+            
+        }
+        else
+        { 
+        
+        }
+        
+    }
 
-   
 }

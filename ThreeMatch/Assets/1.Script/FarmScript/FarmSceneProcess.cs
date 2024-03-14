@@ -2,11 +2,8 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static Unity.VisualScripting.FlowStateWidget;
-using Sequence = DG.Tweening.Sequence;
 
 public class FarmSceneProcess : MonoBehaviour
 {
@@ -24,13 +21,19 @@ public class FarmSceneProcess : MonoBehaviour
 
     public RsFood rs_food;
 
+    public Button PrevBtn;
+
+
     public void Awake()
     {
         rs_Window.transform.localScale = Vector3.zero;
         rs_Window.close.onClick.AddListener(() => 
-        { 
+        {
+           // SoundManager.Instance.Sound_Play("Btn", false, Property.SFX);
             rs_Window.transform.DOScale(0, 0.2f); 
+            rs_Window.IngredReset();
             eventList.Clear(); 
+            SoundManager.Instance.Sound_Play("Popup" , false , Property.SFX);
         });
 
         for (int i = 0; i < cookingData.finishCooking.Count; i++)
@@ -41,6 +44,8 @@ public class FarmSceneProcess : MonoBehaviour
             ob.getText().gameObject.SetActive(false);
             ob.Getbtn().onClick.AddListener(openWindow);
         }
+        PrevBtn.onClick.AddListener(() => { GameManager.Instance.LevelChange("MainScene"); });
+        SoundManager.Instance.Sound_Play("CookingRoom" , true , Property.BGM , 0.28f);
     }
 
 
@@ -52,10 +57,11 @@ public class FarmSceneProcess : MonoBehaviour
         bool b_goCooking = true;
         //만들 음식의 idx 번호 
         int idx = farmFoodData.idx;
-
-
         //만들 음식의 이미지 데이터 
         Cooking cooking = cookingData.finishCooking[idx];
+
+        rs_Window.ingredients = new RsIngredients[cooking.ingredients.Count];
+
 
         //저장소 데이터 
         var storeRoom = GameManager.Instance.gameData.storeRoom;
@@ -90,10 +96,14 @@ public class FarmSceneProcess : MonoBehaviour
         //음식의 재료 갯수만큼 반복
         for (int i = 0; i < cooking.ingredients.Count; i++)
         {
+            RsIngredients ind = Instantiate(cookingData.ingredientsPrefabs , rs_Window.ingredientParent);
+            rs_Window.ingredients[i] = ind;
+
             //해당 음식 검출
             var ingredient = cooking.ingredients[i];
+
             //이미지 -> sprite 데이터 넘겨줌
-            rs_Window.idts[i].img.sprite = ingredient.img;
+            rs_Window.ingredients[i].img.sprite = ingredient.img;
 
             //재료(열거)에 맞는 아이템 검출 
             var data = storeRoom.addItems.Find(x => x.kind == ingredient.kind);
@@ -107,15 +117,15 @@ public class FarmSceneProcess : MonoBehaviour
 
             if (searchIdx)
             {
-                rs_Window.idts[i].text.color = Color.white;
-                rs_Window.idts[i].text.text = $"{ingredient.cnt} / {storeRoom.addItems[data_idx].itemCnt}";
+                rs_Window.ingredients[i].text.color = Color.white;
+                rs_Window.ingredients[i].text.text = $"{ingredient.cnt} / {storeRoom.addItems[data_idx].itemCnt}";
 
                 eventList.Add(new curAction() { item = storeRoom.addItems[data_idx], curCnt = ingredient.cnt });
             }
             else //검출 실패 
             {
-                rs_Window.idts[i].text.color = Color.red;
-                rs_Window.idts[i].text.text = $"X";
+                rs_Window.ingredients[i].text.color = Color.red;
+                rs_Window.ingredients[i].text.text = $"X";
                 b_goCooking = false;
             }
         }
@@ -127,15 +137,20 @@ public class FarmSceneProcess : MonoBehaviour
 
         //팝업창 띄우기
         rs_Window.transform.DOScale(0.8f, 0.2f);
+        SoundManager.Instance.Sound_Play("Popup" , false , Property.SFX);
+
 
         //연결된 리스너를 지움 
         rs_Window.goCooking.onClick.RemoveAllListeners();
         //팝업창의 버튼 클릭이벤트 
         rs_Window.goCooking.onClick.AddListener( () =>
         {
+           // SoundManager.Instance.Sound_Play("Btn", false, Property.SFX);
             rs_food.goCookingClickEvent(cooking.img, cooking.name);
             rs_Window.popupWindowScale();
+            rs_Window.IngredReset();
             rs_food.popupWindowScale(eventList);
+
         });
 
        

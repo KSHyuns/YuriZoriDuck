@@ -22,30 +22,41 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   finishCooking:
-  - name: Pie
-    img: {fileID: 21300000, guid: 0a8fcaffcf9f8d34f9aedbcfe83353b0, type: 3}
+  - name: "\uAC10\uC790\uCE69"
+    img: {fileID: 21300000, guid: 037e5edf07312e345b7147f7230d2f5c, type: 3}
     ingredients:
     - kind: 0
-      img: {fileID: 21300000, guid: 668966247c3687341adea537c511f01f, type: 3}
+      img: {fileID: 21300000, guid: dc8a00a9ea9a64844a0612e965afff7f, type: 3}
       cnt: 1
-    - kind: 1
-      img: {fileID: 21300000, guid: bb95d35478bad4043a416ded82b2c14e, type: 3}
-      cnt: 1
-    - kind: 2
-      img: {fileID: 21300000, guid: 6e524dca915a58b408f62e67123ce912, type: 3}
-      cnt: 1
-  - name: ' Chicken soup'
-    img: {fileID: 21300000, guid: 17939543966b29349877729d71146483, type: 3}
-    ingredients:
-    - kind: 3
-      img: {fileID: 21300000, guid: 40d74219fdf9b924482b9beaeb0b00ed, type: 3}
-      cnt: 1
-    - kind: 4
-      img: {fileID: 21300000, guid: 0a02bba35ec1b074cac9b200cab1e1f5, type: 3}
+    - kind: 6
+      img: {fileID: 21300000, guid: c839b3d3ca70b0b4c97edd3921380d8b, type: 3}
       cnt: 1
     - kind: 5
-      img: {fileID: 21300000, guid: 446dea87b4d2e0c418ffe55c0f217444, type: 3}
+      img: {fileID: 21300000, guid: 4e2140ed4ffe1184081389302de619ee, type: 3}
+      cnt: 1
+  - name: "\uACE0\uAD6C\uB9C8\uCE69"
+    img: {fileID: 21300000, guid: d1df4c86a89a9764c805a0dc12fc4fc4, type: 3}
+    ingredients:
+    - kind: 6
+      img: {fileID: 21300000, guid: c839b3d3ca70b0b4c97edd3921380d8b, type: 3}
+      cnt: 1
+    - kind: 1
+      img: {fileID: 21300000, guid: 075b79d7cdfd1d54b9e40158fede9cf1, type: 3}
+      cnt: 1
+    - kind: 4
+      img: {fileID: 21300000, guid: 3531e18c98639c34e84fe1f48fe2c228, type: 3}
+      cnt: 1
+  - name: "\uB204\uB8FD\uC9C0"
+    img: {fileID: 21300000, guid: b528ac2d9dd284c4399e16e8fd77cc6a, type: 3}
+    ingredients:
+    - kind: 0
+      img: {fileID: 21300000, guid: c9984c805cebe25498d63188ba847309, type: 3}
+      cnt: 1
+    - kind: 0
+      img: {fileID: 21300000, guid: a356d8c444870bc49adf4b38fec79dbd, type: 3}
       cnt: 1
   slotPrefabs: {fileID: 7407423731858058065, guid: a922e3c909c2bc04590f16df90e99594, type: 3}
   itemPrefabs: {fileID: 3577362164000256983, guid: 390dc6d527e7cdb46ba8c03f2207b181, type: 3}
   FarmCookingSlotPrefabs: {fileID: 9118621091274143868, guid: 6ce89c17d7a7fa543ae4e9cbc4b6220b, type: 3}
+  ingredientsPrefabs: {fileID: 5687647407972263071, guid: a592ea824935ce445843a392503cd545, type: 3}
+  slotExPrefabs: {fileID: -1769763890371874524, guid: 5f0b90a9be02d7f42bbcc96def3d20d4, type: 3}

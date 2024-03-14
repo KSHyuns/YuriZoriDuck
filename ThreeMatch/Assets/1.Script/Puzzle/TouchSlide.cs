@@ -25,6 +25,7 @@ public class TouchSlide : MonoBehaviour
     
     private bool dirCheker;
 
+    private bool slideSeccess = false;
     public void OnEnable()
     {
 #if UNITY_EDITOR
@@ -166,24 +167,30 @@ public class TouchSlide : MonoBehaviour
         {   
             SlideOn(selectTile , changeTile);
         }
-        selectTile = null;
-        changeTile = null;
+       // selectTile = null;
+      //  changeTile = null;
     }
 
-        
+
+   
+    Vector2 myTilePosition;
+    Vector2 changeTilePosition;
     private void SlideOn(Block scTile ,Block changeTile)
     {
-        Vector2 myTilePosition = scTile.transform.position;
-        Vector2 changeTilePosition = changeTile.transform.position;
 
+        myTilePosition = selectTile.transform.position;
+        changeTilePosition = changeTile.transform.position;
 
-       
+        SoundManager.Instance.Sound_Play("Swap", false, Property.SFX);
+
+        slideSeccess = true;
+
         DG.Tweening.Sequence seq = DOTween.Sequence();
         seq.OnStart(()=>{ })
-        .AppendCallback(()=>{ BlockSwap.swap(scTile, changeTile , Board.instance.cellList); })
-        .Insert(0f, scTile.transform.DOMove(changeTilePosition , 0.2f))
+        .AppendCallback(()=>{ BlockSwap.swap(selectTile, changeTile, Board.instance.cellList); })
+        .Insert(0f, selectTile.transform.DOMove(changeTilePosition , 0.2f))
         .Insert(0f, changeTile.transform.DOMove(myTilePosition , 0.2f))
-        .OnComplete(()=>{MatchLogic3().Forget();});
+        .OnComplete(()=>{ MatchLogic3().Forget();});
         
     }
     
@@ -277,12 +284,25 @@ public class TouchSlide : MonoBehaviour
     public async UniTask MatchLogic3()
     {
         await UniTask.Delay(TimeSpan.FromSeconds(0.02f));
+       
 
-        //寃??媛濡??몃?   寃??寃곌낵 matchList
         EvalBlock(Board.x,Board.y,MatchList);
 
-        if(MatchList.Count <= 0) return;
-
+        if (MatchList.Count <= 0)
+        {
+            //슬라이드가 된 후 
+            if (slideSeccess)
+            { 
+                Sequence seq = DOTween.Sequence().OnStart(() => { })
+                .AppendCallback(() => { BlockSwap.swap(selectTile, changeTile, Board.instance.cellList); })
+                .Insert(0f, selectTile.transform.DOMove(myTilePosition, 0.2f))
+                .Insert(0f, changeTile.transform.DOMove(changeTilePosition, 0.2f));
+                //.OnComplete(() => { oneBlock = null;twoBlock = null; });
+            }
+             
+            return;
+        }
+        slideSeccess = false;
         //留ㅼ묶??釉?? ??굅 null
         MatchList.ForEach(async cell=> 
         {
@@ -294,16 +314,24 @@ public class TouchSlide : MonoBehaviour
 
             Destroy(cell.block.gameObject); 
             cell.block = null;
+
+            var ex = PoolManager.ExPool.Get();
+            ex.transform.position = cell.position;
+            ex.ParticleSystem.Play();
+            ex.Release().Forget();
         });
+
+        SoundManager.Instance.Sound_Play("Pung", false, Property.SFX);
 
         MatchList.Clear();
         colList.Clear();
         Board.instance.blockMoving = true;
-        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.15f));
         
         float curveSpeed = 0;
+        
 
-        for(int i=0;i< Board.x ; i++)
+        for (int i=0;i< Board.x ; i++)
         {
             //?몃? ???紐⑤? 李얜???0, 1, 2, 3, 4
             var colarray = Board.instance.cellList.FindAll(x=>x.cellPoint.x == i);
@@ -322,9 +350,9 @@ public class TouchSlide : MonoBehaviour
 
             //移댁???媛??媛 0?대?硫?留ㅼ????????? ????댁? ?ㅼ? 以?? ???媛??.
             if(nullCnt == 0) continue;
-
+            
             //吏??? block 媛??
-            for(int j = 0 ; j < nullCnt ; j++)
+            for (int j = 0 ; j < nullCnt ; j++)
             {
                for(int k = colarray.Count - 1 ; k >= 0 ; k--)
                {    

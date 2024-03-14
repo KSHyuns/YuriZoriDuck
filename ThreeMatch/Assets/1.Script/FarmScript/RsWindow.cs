@@ -13,24 +13,32 @@ public class RsWindow : MonoBehaviour
 
     public TextMeshProUGUI foodname;
 
-    public idts[] idts;
+    public RsIngredients[] ingredients;
 
     public Button goCooking;
 
     public Button close;
 
+    public Transform ingredientParent;
 
     public void popupWindowScale()
     {
+        SoundManager.Instance.Sound_Play("Popup", false, Property.SFX);
         transform.DOScale(0, 0.2f);
     }
 
 
+    public void IngredReset()
+    {
+        if (ingredients.Length > 0)
+        {
+            foreach (var item in ingredients)
+            {
+                Destroy(item.gameObject);
+            }
+            ingredients = null;
+        }
+    }
+
 }
 
-[System.Serializable]
-public struct idts
-{
-    public Image img;
-    public TextMeshProUGUI text;
-}

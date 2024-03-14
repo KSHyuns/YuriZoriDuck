@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -14,7 +14,7 @@ public class BlockSwap
     public static void swap(Block scTile ,Block changeTile , List<Cell> cellList)
     {
 
-        //* 위치 바꾸기
+        //* ??? 諛?씀湲?
         int sc = scTile.transform.parent.GetSiblingIndex();
         int ch = changeTile.transform.parent.GetSiblingIndex();
 
