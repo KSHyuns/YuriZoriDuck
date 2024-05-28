@@ -13,8 +13,6 @@ public class BlockSwap
 
     public static void swap(Block scTile ,Block changeTile , List<Cell> cellList)
     {
-
-        //* ??? 諛?씀湲?
         int sc = scTile.transform.parent.GetSiblingIndex();
         int ch = changeTile.transform.parent.GetSiblingIndex();
 

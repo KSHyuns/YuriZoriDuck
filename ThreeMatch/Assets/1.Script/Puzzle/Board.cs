@@ -56,6 +56,7 @@ public class Board : MonoBehaviour
        
         CellParent  = CreateParent("CellPanel"  , new GameObject());
         BlockParent = CreateParent("BlockParent" , new GameObject());
+        
         for(int j = 0  ; j < y ; j++)
         for(int i = -x/2 ; i <=x/2 ; i++)
         {
